@@ -1,0 +1,8 @@
+[27-May-2026 19:48:00 Europe/Berlin] [2026-05-27 19:48:00] Falha de conexão PDO: SQLSTATE[HY000] [1049] Unknown database 'syntara_db'
+[27-May-2026 19:48:30 Europe/Berlin] PHP Fatal error:  Cannot redeclare verifyCSRF() (previously declared in C:\xampp\htdocs\syntara\includes\functions.php:51) in C:\xampp\htdocs\syntara\includes\functions.php on line 429
+[27-May-2026 19:48:31 Europe/Berlin] PHP Fatal error:  Cannot redeclare verifyCSRF() (previously declared in C:\xampp\htdocs\syntara\includes\functions.php:51) in C:\xampp\htdocs\syntara\includes\functions.php on line 429
+[27-May-2026 19:48:32 Europe/Berlin] PHP Fatal error:  Cannot redeclare verifyCSRF() (previously declared in C:\xampp\htdocs\syntara\includes\functions.php:51) in C:\xampp\htdocs\syntara\includes\functions.php on line 429
+[27-May-2026 19:48:32 Europe/Berlin] PHP Fatal error:  Cannot redeclare verifyCSRF() (previously declared in C:\xampp\htdocs\syntara\includes\functions.php:51) in C:\xampp\htdocs\syntara\includes\functions.php on line 429
+[27-May-2026 19:48:32 Europe/Berlin] PHP Fatal error:  Cannot redeclare verifyCSRF() (previously declared in C:\xampp\htdocs\syntara\includes\functions.php:51) in C:\xampp\htdocs\syntara\includes\functions.php on line 429
+[27-May-2026 19:48:37 Europe/Berlin] PHP Fatal error:  Cannot redeclare verifyCSRF() (previously declared in C:\xampp\htdocs\syntara\includes\functions.php:51) in C:\xampp\htdocs\syntara\includes\functions.php on line 429
+[27-May-2026 19:48:43 Europe/Berlin] PHP Fatal error:  Cannot redeclare verifyCSRF() (previously declared in C:\xampp\htdocs\syntara\includes\functions.php:51) in C:\xampp\htdocs\syntara\includes\functions.php on line 429
