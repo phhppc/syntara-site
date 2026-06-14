@@ -45,9 +45,9 @@ function redirect(string $path): void
     exit;
 }
 
-function url(string $path): string
-{
-    return ROOT_URL . '/' . ltrim($path, '/');
+function url(string $path): string {
+    $base = rtrim(ROOT_URL, '/');
+    return $base . '/' . ltrim($path, '/');
 }
 
 function requireLogin(?string $role = null): void
