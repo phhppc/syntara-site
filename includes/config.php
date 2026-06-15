@@ -13,10 +13,18 @@ define('SITE_VERSION', '3.0.0');
 define('ROOT_PATH', dirname(__DIR__));
 
 // URL dinâmica — funciona no Railway e em qualquer host
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-$host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
+// Detecta HTTPS corretamente no Railway (usa proxy)
+if (
+    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && $_SERVER['HTTP_X_FORWARDED_SSL'] === 'on')
+) {
+    $protocol = 'https';
+} else {
+    $protocol = 'http';
+}
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 define('ROOT_URL', $protocol . '://' . $host);
-
 // ─────────────────────────────────────────
 // ERROS
 // ─────────────────────────────────────────
