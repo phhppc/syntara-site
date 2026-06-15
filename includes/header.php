@@ -29,7 +29,7 @@ $bodyClass =
     <title><?= e($pageTitle) ?> — <?= SITE_NAME ?></title>
 
     <link rel="stylesheet" href="/assets/css/style.css">
-    <script src="<?= url('assets/js/main.js') ?>" defer></script>
+    <script src="/assets/js/main.js" defer></script>
 
 </head>
 
