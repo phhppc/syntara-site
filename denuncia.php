@@ -29,25 +29,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif (mb_strlen($descricao) > 2000) {
             $error = 'Descrição muito longa (máx. 2000 caracteres).';
         } else {
-            $codigo = bin2hex(random_bytes(6));
+            try {
+                $codigo = bin2hex(random_bytes(6));
 
-            $stmt = $pdo->prepare("INSERT INTO denuncias (descricao, codigo) VALUES (?, ?)");
-            $stmt->execute([$descricao, $codigo]);
+                $stmt = $pdo->prepare("INSERT INTO denuncias (descricao, codigo, tipo) VALUES (?, ?, ?)");
+                $stmt->execute([$descricao, $codigo, 'geral']);
 
-            $codigoDenuncia = $codigo;
+                $codigoDenuncia = $codigo;
 
-            // Destrói sessão se existir (garante anonimato)
-            if (session_status() === PHP_SESSION_ACTIVE) {
-                $_SESSION = [];
-                if (ini_get("session.use_cookies")) {
-                    $params = session_get_cookie_params();
-                    setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+                // Destrói sessão se existir (garante anonimato)
+                if (session_status() === PHP_SESSION_ACTIVE) {
+                    $_SESSION = [];
+                    if (ini_get("session.use_cookies")) {
+                        $params = session_get_cookie_params();
+                        setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+                    }
+                    session_destroy();
                 }
-                session_destroy();
-            }
 
-            // Evita resubmissão do formulário no F5: redireciona com o código na URL
-            redirect('denuncia.php?codigo=' . urlencode($codigoDenuncia));
+                // Evita resubmissão do formulário no F5: redireciona com o código na URL
+                redirect('denuncia.php?codigo=' . urlencode($codigoDenuncia));
+            } catch (PDOException $e) {
+                error_log('Erro ao salvar denúncia: ' . $e->getMessage());
+                $error = 'Não foi possível registrar sua denúncia agora. Tente novamente em alguns instantes.';
+            }
         }
     }
 }
