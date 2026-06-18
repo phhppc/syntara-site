@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$descricao, $codigo]);
 
             $codigoDenuncia = $codigo;
-            $success = true;
 
             // Destrói sessão se existir (garante anonimato)
             if (session_status() === PHP_SESSION_ACTIVE) {
@@ -46,8 +45,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 session_destroy();
             }
+
+            // Evita resubmissão do formulário no F5: redireciona com o código na URL
+            redirect('denuncia.php?codigo=' . urlencode($codigoDenuncia));
         }
     }
+}
+
+// Se voltamos de um redirect de sucesso, recupera o código da URL
+if (!empty($_GET['codigo'])) {
+    $codigoDenuncia = inputString('codigo');
+    $success = true;
 }
 
 $page_title = 'Denúncia Anônima';
