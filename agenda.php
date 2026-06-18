@@ -24,10 +24,12 @@ if ($tipoUsuario === 'aluno') {
     exit;
 }
 
-// A partir daqui, só professor (admin não usa agenda)
-if ($tipoUsuario !== 'professor') {
+// Professor e Admin podem acessar
+if (!in_array($tipoUsuario, ['professor', 'admin'], true)) {
     redirect('index.php');
 }
+
+
 
 $professorId = $usuarioId;
 $error   = '';
