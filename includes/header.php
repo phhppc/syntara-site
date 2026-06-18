@@ -9,6 +9,7 @@ $pageTitle = $page_title ?? SITE_NAME;
 $userType = $_SESSION['user_type'] ?? null;
 $userName = $_SESSION['user_nome'] ?? 'Visitante';
 
+
 $bodyClass =
     ($body_class ?? '') .
     ' ' .
@@ -28,8 +29,8 @@ $bodyClass =
 
     <title><?= e($pageTitle) ?> — <?= SITE_NAME ?></title>
 
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <script src="/assets/js/main.js" defer></script>
+      <link rel="stylesheet" href="/assets/css/style.css">
+      <script src="/assets/js/main.js" defer></script>
 
 </head>
 
@@ -76,11 +77,12 @@ $bodyClass =
                 <?php elseif ($userType === 'professor'): ?>
                     <a href="<?= url('agenda.php') ?>" class="nav-link">📅 Agenda</a>
 
+                    <?php elseif ($userType === 'admin'): ?>
+                    <a href="<?= url('agenda.php') ?>" class="nav-link">📅 Agenda</a>
+                    
                 <?php endif; ?>
 
-                <span class="nav-link user-name">
-                    👤 <?= e($userName) ?>
-                </span>
+                
 
                 <a href="<?= url('logout.php') ?>" class="nav-link btn-danger">
                     Sair
