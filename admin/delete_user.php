@@ -19,12 +19,12 @@ $userId = inputInt('id');
 
 if ($userId <= 0) {
     setFlash('error', 'Usuário não especificado.');
-    redirect('dashboard.php');
+    redirect('admin/dashboard.php');
 }
 
 if ($userId === (int) $_SESSION['user_id']) {
     setFlash('error', 'Você não pode excluir sua própria conta.');
-    redirect('dashboard.php');
+    redirect('admin/dashboard.php');
 }
 
 // Busca usuário via classe
@@ -33,19 +33,19 @@ $user = $userRepo->findById($userId);
 
 if (!$user) {
     setFlash('error', 'Usuário não encontrado.');
-    redirect('dashboard.php');
+    redirect('admin/dashboard.php');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verifyCsrf()) {
         setFlash('error', 'Token de segurança inválido.');
-        redirect('dashboard.php');
+        redirect('admin/dashboard.php');
     }
 
     // Verifica se não é outro admin
     if ($user['tipo'] === 'admin') {
         setFlash('error', 'Não é possível excluir outro administrador.');
-        redirect('dashboard.php');
+        redirect('admin/dashboard.php');
     }
 
     // Cleanup via classes
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userRepo->delete($userId);
 
     setFlash('success', 'Usuário excluído com sucesso.');
-    redirect('dashboard.php');
+    redirect('admin/dashboard.php');
 }
 
 $page_title = 'Excluir Usuário';
