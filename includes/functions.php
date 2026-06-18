@@ -213,6 +213,14 @@ function checkRateLimit(string $key, int $maxAttempts = 5, int $seconds = 60): b
 }
 
 /**
+ * Reseta o contador de rate limit de uma chave (ex: após sucesso na ação).
+ */
+function resetRateLimit(string $key): void
+{
+    unset($_SESSION['rate_limit'][$key]);
+}
+
+/**
  * IP do usuário
  */
 function clientIp(): string
